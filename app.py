@@ -4,7 +4,6 @@ import os
 import re
 from PIL import Image
 import io
-# 문제를 일으키던 'streamlit_clipboard' 관련 코드를 모두 삭제했습니다.
 
 # --- 기본 설정 ---
 st.set_page_config(page_title="오늘 뭐 먹지? (냉장고 비우기)", page_icon="🥗")
@@ -63,7 +62,20 @@ def generate_recipe_image(recipe_name):
     return None
 
 # --- 웹 앱 UI (화면) 구성 ---
-st.title("🥗 오늘 뭐 먹지? (냉장고 비우기)")
+st.title("🥗 오늘 뭐 먹지? ")
+
+# --- 메인 이미지 표시 ---
+try:
+    st.image("cheepoom.jpg", caption="금복상회 대표상품 '치품송'")
+except Exception as e:
+    st.warning("메인 이미지를 불러오는 데 실패했습니다. GitHub 저장소에 이미지 파일이 있는지 확인해주세요.")
+
+# --- ✨ 수정된 부분: 프로젝트 소개 문구 추가 ✨ ---
+# st.subheader를 사용하여 이미지 아래에 부제목 스타일의 텍스트를 추가합니다.
+st.subheader("🌱 남김없는 음식물 비우기 프로젝트")
+st.markdown("---") # 시각적인 구분을 위해 라인을 추가합니다.
+
+
 st.write("냉장고에 있는 재료만으로 금복상회 치품송 수석 셰프가 맛있는 요리를 추천해 드립니다!")
 ingredients_input = st.text_area("가지고 계신 재료를 쉼표(,)나 줄바꿈으로 구분해서 모두 입력해주세요.", placeholder="예: 치품송, 파프리카, 양파, 계란, 올리브유")
 
@@ -91,11 +103,9 @@ if st.button("냉장고를 비워보자! 🍽️"):
                             st.image(recipe_image, caption=f"AI가 생성한 '{recipe_name}' 이미지", use_column_width=True)
                         st.markdown(clean_recipe_str)
             
-            # --- 수정된 부분: '전용 복사 상자' 추가 ---
             if full_recipe_text_for_copy:
                 st.markdown("---")
                 st.info("📋 아래 상자 안의 텍스트를 복사해서 공유하세요!")
-                # st.code()를 사용하여 깔끔한 텍스트 상자를 만듭니다.
                 st.code(full_recipe_text_for_copy.strip(), language=None)
 
     else:
