@@ -66,7 +66,7 @@ def generate_recipe_image(recipe_name):
 # --- ✨ 수정된 부분: 레이아웃 순서 변경 및 폰트 크기 조절 ---
 
 # 1. 이미지를 가장 먼저 보여줍니다.
-image_url = "https://github.com/shinsun4866-droid/cheepoom/blob/main/choopoom.jpg" # 이미지 주소를 직접 입력하는 것이 가장 안정적입니다.
+image_url = "https://github.com/shinsun4866-droid/cheepoom/blob/main/cheepoom.jpg" # 이미지 주소를 직접 입력하는 것이 가장 안정적입니다.
 st.image(image_url, caption="금복상회 대표상품 '치품송'")
 
 # 2. 그 아래에 메인 제목을 보여줍니다.
