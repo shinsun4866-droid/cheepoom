@@ -62,17 +62,19 @@ def generate_recipe_image(recipe_name):
     return None
 
 # --- 웹 앱 UI (화면) 구성 ---
-st.title("🥗 오늘 뭐 먹지? ")
 
-# --- 메인 이미지 표시 ---
-try:
-    st.image("cheepoom.jpg", caption="금복상회 대표상품 '치품송'")
-except Exception as e:
-    st.warning("메인 이미지를 불러오는 데 실패했습니다. GitHub 저장소에 이미지 파일이 있는지 확인해주세요.")
+# --- ✨ 수정된 부분: 레이아웃 순서 변경 및 폰트 크기 조절 ---
 
-# --- ✨ 수정된 부분: 프로젝트 소개 문구 추가 ✨ ---
-# st.subheader를 사용하여 이미지 아래에 부제목 스타일의 텍스트를 추가합니다.
-st.subheader("🌱 남김없는 음식물 비우기 프로젝트")
+# 1. 이미지를 가장 먼저 보여줍니다.
+image_url = "https://raw.githubusercontent.com/shinsun4866-droid/cheepoom/main/cheepoom.jpg" # 이미지 주소를 직접 입력하는 것이 가장 안정적입니다.
+st.image(image_url, caption="금복상회 대표상품 '치품송'")
+
+# 2. 그 아래에 메인 제목을 보여줍니다.
+st.title("🥗 오늘 뭐 먹지? (냉장고 비우기)")
+
+# 3. 그 아래에 부제목을 작은 폰트로 보여줍니다.
+# st.markdown과 HTML 태그를 사용하여 폰트 크기를 조절합니다. <h4>는 st.subheader보다 작은 제목입니다.
+st.markdown("<h4>🌱 남김없는 음식물 비우기 프로젝트</h4>", unsafe_allow_html=True)
 st.markdown("---") # 시각적인 구분을 위해 라인을 추가합니다.
 
 
