@@ -63,20 +63,15 @@ def generate_recipe_image(recipe_name):
 
 # --- 웹 앱 UI (화면) 구성 ---
 
-# --- ✨ 수정된 부분: 레이아웃 순서 변경 및 폰트 크기 조절 ---
-
-# 1. 이미지를 가장 먼저 보여줍니다.
-image_url = "https://github.com/shinsun4866-droid/cheepoom/blob/main/cheepoom.jpg" # 이미지 주소를 직접 입력하는 것이 가장 안정적입니다.
+# --- ✨ 수정된 부분: 올바른 이미지 주소로 변경 ---
+# GitHub에 올라간 실제 파일 이름('choopoom.jpg')과 진짜 이미지 주소 형식('raw.githubusercontent.com')으로 수정했습니다.
+image_url = "https://raw.githubusercontent.com/shinsun4866-droid/cheepoom/main/cheepoom.jpg" 
 st.image(image_url, caption="금복상회 대표상품 '치품송'")
 
-# 2. 그 아래에 메인 제목을 보여줍니다.
 st.title("🥗 오늘 뭐 먹지?")
 
-# 3. 그 아래에 부제목을 작은 폰트로 보여줍니다.
-# st.markdown과 HTML 태그를 사용하여 폰트 크기를 조절합니다. <h4>는 st.subheader보다 작은 제목입니다.
 st.markdown("<h4>🌱 남김없는 음식물 비우기 프로젝트</h4>", unsafe_allow_html=True)
-st.markdown("---") # 시각적인 구분을 위해 라인을 추가합니다.
-
+st.markdown("---")
 
 st.write("냉장고에 있는 재료만으로 금복상회 치품송 수석 셰프가 맛있는 요리를 추천해 드립니다!")
 ingredients_input = st.text_area("가지고 계신 재료를 쉼표(,)나 줄바꿈으로 구분해서 모두 입력해주세요.", placeholder="예: 치품송, 파프리카, 양파, 계란, 올리브유")
