@@ -16,6 +16,7 @@ except Exception as e:
     st.stop()
     
 # --- AI 모델 설정 및 프롬프트 ---
+# [수정 1] 이전에 여기에 오타가 있었습니다. 아래처럼 수정해주세요.
 text_model = genai.GenerativeModel('gemini-1.5-flash')
 image_model = genai.GenerativeModel('gemini-1.5-flash')
 
@@ -63,20 +64,36 @@ def generate_recipe_image(recipe_name):
 
 # --- 웹 앱 UI (화면) 구성 ---
 
-# --- ✨ 수정된 부분: 올바른 이미지 주소로 변경 ---
-# GitHub에 올라간 실제 파일 이름('choopoom.jpg')과 진짜 이미지 주소 형식('raw.githubusercontent.com')으로 수정했습니다.
+# [수정 2] 기존의 st.image(...) 한 줄을 지우고, 아래의 코드로 완전히 교체합니다.
+# -------------------------------------------------------------------------
+
+# 1. 판매 페이지(스마트스토어) 주소를 여기에 정확하게 입력하세요.
+smart_store_url = "https://smartstore.naver.com/chipumsong"
+
+# 2. GitHub에 있는 이미지 주소입니다.
 image_url = "https://raw.githubusercontent.com/shinsun4866-droid/cheepoom/main/choopoom.jpg" 
-st.image(image_url, caption="금복상회 대표상품 '치품송'")
 
+# 3. st.markdown과 HTML을 사용하여 클릭 가능한 이미지를 만듭니다.
+# <a> 태그(링크)로 <img> 태그(이미지)를 감싸서 링크를 만듭니다.
+# target="_blank"는 새 탭에서 링크가 열리도록 합니다.
+st.markdown(f"""
+<a href="{smart_store_url}" target="_blank" title="치품송 구매 페이지로 이동">
+    <img src="{image_url}" alt="치품송 구매하러 가기" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+</a>
+""", unsafe_allow_html=True)
+st.caption("▲ 금복상회 치품송 공식 스토어")
+
+
+# 메인 제목과 부제목은 그대로 유지합니다.
 st.title("🥗 오늘 뭐 먹지?")
-
-st.markdown("<h4>🌱 남김없는 음식물 비우기 프로젝트</h4>", unsafe_allow_html=True)
+st.markdown("<h4>🌱 있는 재료로 뚝딱!</h4>", unsafe_allow_html=True)
 st.markdown("---")
 
-st.write("냉장고에 있는 재료만으로 금복상회 치품송 수석 셰프가 맛있는 요리를 추천해 드립니다!")
-ingredients_input = st.text_area("가지고 계신 재료를 쉼표(,)나 줄바꿈으로 구분해서 모두 입력해주세요.", placeholder="예: 치품송, 파프리카, 양파, 계란, 올리브유")
 
-if st.button("냉장고를 비워보자! 🍽️"):
+st.write("금복상회 치품송이 제안하는 제로웨이스트 쿠킹앱입니다. 냉장고에 남은 재료를 입력하면 오늘의 한 끼를 추천,추가재료와 조리법을 알려 드립니다!")
+ingredients_input = st.text_area("가지고 계신 재료를 쉼표(,)나 줄바꿈으로 구분해서 모두 입력해주세요. 레시피는 권장 예시이며, 개인 기호 재료에 상태에 따라 조절 하시기바랍니다.", placeholder="예: 치품송, 파프리카, 양파, 계란, 올리브유")
+
+if st.button("추천 레시피 받기 🍽️"):
     if ingredients_input:
         with st.spinner("금복상회 수석 셰프가 레시피를 구상 중입니다... 🧑‍🍳"):
             full_prompt = prompt_template + "\n**입력 재료:** " + ingredients_input
@@ -85,7 +102,7 @@ if st.button("냉장고를 비워보자! 🍽️"):
             full_recipe_text_for_copy = ""
 
             st.markdown("---")
-            st.subheader("✨ 금복상회 치품송 수석 셰프 추천요리 ✨")
+            st.subheader("✨ 수석 셰프 추천요리 ✨")
 
             for recipe_str in recipes:
                 if "요리 이름:" in recipe_str:
