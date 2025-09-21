@@ -6,7 +6,7 @@ from PIL import Image
 import io
 
 # --- 기본 설정 ---
-st.set_page_config(page_title="오늘 뭐 먹지?", page_icon="🥗")
+st.set_page_config(page_title="오늘 뭐 먹지? (냉장고 비우기)", page_icon="🥗")
 
 # --- API 키 설정 ---
 try:
@@ -65,10 +65,10 @@ def generate_recipe_image(recipe_name):
 
 # --- ✨ 수정된 부분: 올바른 이미지 주소로 변경 ---
 # GitHub에 올라간 실제 파일 이름('choopoom.jpg')과 진짜 이미지 주소 형식('raw.githubusercontent.com')으로 수정했습니다.
-image_url = "https://raw.githubusercontent.com/shinsun4866-droid/cheepoom/main/cheepoom.jpg" 
+image_url = "https://raw.githubusercontent.com/shinsun4866-droid/cheepoom/main/choopoom.jpg" 
 st.image(image_url, caption="금복상회 대표상품 '치품송'")
 
-st.title("🥗 오늘 뭐 먹지?")
+st.title("🥗 오늘 뭐 먹지? (냉장고 비우기)")
 
 st.markdown("<h4>🌱 남김없는 음식물 비우기 프로젝트</h4>", unsafe_allow_html=True)
 st.markdown("---")
@@ -107,4 +107,5 @@ if st.button("냉장고를 비워보자! 🍽️"):
 
     else:
         st.warning("재료를 먼저 입력해주세요!")
+
 
