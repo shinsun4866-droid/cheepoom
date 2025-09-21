@@ -6,7 +6,7 @@ from PIL import Image
 import io
 
 # --- 기본 설정 ---
-st.set_page_config(page_title="오늘 뭐 먹지? (냉장고 비우기)", page_icon="🥗")
+st.set_page_config(page_title="오늘 뭐 먹지? ", page_icon="🥗")
 
 # --- API 키 설정 ---
 try:
