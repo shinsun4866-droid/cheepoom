@@ -2,14 +2,11 @@ import streamlit as st
 import google.generativeai as genai
 import os
 import re
-# [수정됨] 이미지 관련 라이브러리는 더 이상 필요 없으므로 삭제합니다.
 
 # --- 기본 설정 ---
 st.set_page_config(page_title="오늘 뭐 먹지?", page_icon="🥗")
 
 # --- API 키 설정 ---
-# Streamlit Community Cloud의 Secrets에 'GEMINI_API_KEY'가 설정되어 있어야 합니다.
-# 로컬에서 실행 시에는 환경 변수 등으로 API 키를 설정해야 합니다.
 try:
     genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 except Exception as e:
@@ -17,8 +14,8 @@ except Exception as e:
     st.stop()
     
 # --- AI 모델 설정 및 프롬프트 ---
-# [수정됨] 텍스트 생성 모델만 사용합니다.
-text_model = genai.GenerativeModel('gemini-1.5-flash')
+# [수정됨] 안정적인 실행을 위해 모델을 'gemini-pro'로 변경합니다.
+text_model = genai.GenerativeModel('gemini-pro')
 
 prompt_template = """
 당신은 '금복상회'의 수석 셰프로, 냉장고 속 재료로 만들 수 있는 요리를 추천하는 전문가입니다. 아래 규칙을 반드시 준수하여 답변해야 합니다.
@@ -46,8 +43,6 @@ prompt_template = """
 2. (조리법 2)
 3. (이하 생략)
 """
-
-# [수정됨] 이미지 생성 함수를 완전히 삭제합니다.
 
 # --- 웹 앱 UI (화면) 구성 ---
 
@@ -95,11 +90,8 @@ if st.button("추천 레시피 받기 🍽️"):
                     clean_recipe_str = recipe_str.strip()
                     full_recipe_text_for_copy += clean_recipe_str + "\n\n---\n\n"
                     
-                    # [수정됨] '요리 이름' 추출 로직은 레시피 표시에 필요 없으므로 삭제합니다.
-                    
                     # 각 레시피를 테두리가 있는 컨테이너에 표시
                     with st.container(border=True):
-                        # [수정됨] 이미지 생성 및 표시 부분을 완전히 삭제합니다.
                         st.markdown(clean_recipe_str)
             
             # 전체 레시피를 복사할 수 있는 코드 블록 제공
@@ -110,4 +102,5 @@ if st.button("추천 레시피 받기 🍽️"):
 
     else:
         st.warning("재료를 먼저 입력해주세요!")
+
 
