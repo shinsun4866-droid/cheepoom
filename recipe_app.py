@@ -14,8 +14,8 @@ except Exception as e:
     st.stop()
     
 # --- AI 모델 설정 및 프롬프트 ---
-# [수정됨] 모델 이름을 조금 더 명확한 버전('gemini-1.0-pro')으로 변경합니다.
-text_model = genai.GenerativeModel('gemini-1.0-pro')
+# [수정됨] 마지막 시도로, 가장 최신의 경량화 모델('gemini-1.5-flash-latest')로 변경합니다.
+text_model = genai.GenerativeModel('gemini-1.5-flash-latest')
 
 prompt_template = """
 당신은 '금복상회'의 수석 셰프로, 냉장고 속 재료로 만들 수 있는 요리를 추천하는 전문가입니다. 아래 규칙을 반드시 준수하여 답변해야 합니다.
